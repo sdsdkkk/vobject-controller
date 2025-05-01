@@ -1,11 +1,15 @@
 #include <GL/glut.h>
+#include <objcontroller.hpp>
 
 // Rotation angles
 float angleX = 0.0f, angleY = 0.0f;
 
-void initGL() {
+ObjController *_ocGL;
+
+void initGL(ObjController *oc) {
     glEnable(GL_DEPTH_TEST); // Enable depth testing
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Background color
+    _ocGL = oc;
 }
 
 void display() {

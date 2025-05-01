@@ -1,7 +1,11 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include <objcontroller.hpp>
+
+ObjController *_oc;
 
 void detectFace(cv::Mat image);
+void setController(ObjController *oc);
 
 int videoCapture() {
     cv::VideoCapture cap(0);
@@ -41,9 +45,23 @@ void detectFace(cv::Mat image) {
     }
 
     std::vector<cv::Rect> faces;
+    cv::Rect closestFace;
+
     faceCascade.detectMultiScale(grayscaleImage, faces, 1.1, 3, 0, cv::Size(30, 30));
 
+    int maxWidth = -1;
     for (const auto& face : faces) {
-      cv::rectangle(image, face, cv::Scalar(255, 0, 0), 2);
+        if (face.width > maxWidth) {
+            maxWidth = face.width;
+            closestFace = face;
+        }
+        cv::rectangle(image, face, cv::Scalar(255, 0, 0), 2);
     }
+
+    _oc->x = closestFace.x;
+    _oc->y = closestFace.y;
+}
+
+void setController(ObjController *oc) {
+    _oc = oc;
 }

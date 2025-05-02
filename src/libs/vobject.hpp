@@ -5,6 +5,7 @@
 float angleX = 0.0f, angleY = 0.0f;
 
 ObjController *_ocGL;
+float anchorX = 0.0f, anchorY = 0.0f, anchorZ = 0.0f;
 
 void initGL(ObjController *oc) {
     glEnable(GL_DEPTH_TEST); // Enable depth testing
@@ -12,9 +13,16 @@ void initGL(ObjController *oc) {
     _ocGL = oc;
 }
 
+void updatePosition() {
+    anchorX = (((float) _ocGL->x / 1000) - 0.5) * 2;
+    anchorY = (((float) _ocGL->y / 1000) - 0.5) * 2;
+    //anchorZ = ((float) _ocGL->z / 1000) - 0.5;
+}
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear buffers
     glLoadIdentity(); // Reset modelview matrix
+    updatePosition();
 
     glTranslatef(0.0f, 0.0f, -7.0f); // Move into the screen
     glRotatef(angleX, 1.0f, 0.0f, 0.0f); // Rotate around X-axis
@@ -23,46 +31,46 @@ void display() {
     glBegin(GL_QUADS); // Start drawing cube
 
     // Front face (red)
-    glColor3f(1.0f, 0.0f, 0.0f);     
-    glVertex3f(-1.0f, -1.0f,  1.0f);
-    glVertex3f( 1.0f, -1.0f,  1.0f);
-    glVertex3f( 1.0f,  1.0f,  1.0f);
-    glVertex3f(-1.0f,  1.0f,  1.0f);
+    glColor3f(1.0f, 0.0f, 0.0f); 
+    glVertex3f(-1.0f + anchorX, -1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX, -1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX,  1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f(-1.0f + anchorX,  1.0f + anchorY,  1.0f + anchorZ);
 
     // Back face (green)
-    glColor3f(0.0f, 1.0f, 0.0f);     
-    glVertex3f(-1.0f, -1.0f, -1.0f);
-    glVertex3f(-1.0f,  1.0f, -1.0f);
-    glVertex3f( 1.0f,  1.0f, -1.0f);
-    glVertex3f( 1.0f, -1.0f, -1.0f);
+    glColor3f(0.0f, 1.0f, 0.0f); 
+    glVertex3f(-1.0f + anchorX, -1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f(-1.0f + anchorX,  1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX,  1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX, -1.0f + anchorY, -1.0f + anchorZ);
 
     // Top face (blue)
-    glColor3f(0.0f, 0.0f, 1.0f);     
-    glVertex3f(-1.0f,  1.0f, -1.0f);
-    glVertex3f(-1.0f,  1.0f,  1.0f);
-    glVertex3f( 1.0f,  1.0f,  1.0f);
-    glVertex3f( 1.0f,  1.0f, -1.0f);
+    glColor3f(0.0f, 0.0f, 1.0f); 
+    glVertex3f(-1.0f + anchorX,  1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f(-1.0f + anchorX,  1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX,  1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX,  1.0f + anchorY, -1.0f + anchorZ);
 
     // Bottom face (yellow)
-    glColor3f(1.0f, 1.0f, 0.0f);     
-    glVertex3f(-1.0f, -1.0f, -1.0f);
-    glVertex3f( 1.0f, -1.0f, -1.0f);
-    glVertex3f( 1.0f, -1.0f,  1.0f);
-    glVertex3f(-1.0f, -1.0f,  1.0f);
+    glColor3f(1.0f, 1.0f, 0.0f); 
+    glVertex3f(-1.0f + anchorX, -1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX, -1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX, -1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f(-1.0f + anchorX, -1.0f + anchorY,  1.0f + anchorZ);
 
     // Right face (cyan)
-    glColor3f(0.0f, 1.0f, 1.0f);     
-    glVertex3f( 1.0f, -1.0f, -1.0f);
-    glVertex3f( 1.0f,  1.0f, -1.0f);
-    glVertex3f( 1.0f,  1.0f,  1.0f);
-    glVertex3f( 1.0f, -1.0f,  1.0f);
+    glColor3f(0.0f, 1.0f, 1.0f); 
+    glVertex3f( 1.0f + anchorX, -1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX,  1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX,  1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f( 1.0f + anchorX, -1.0f + anchorY,  1.0f + anchorZ);
 
     // Left face (magenta)
-    glColor3f(1.0f, 0.0f, 1.0f);     
-    glVertex3f(-1.0f, -1.0f, -1.0f);
-    glVertex3f(-1.0f, -1.0f,  1.0f);
-    glVertex3f(-1.0f,  1.0f,  1.0f);
-    glVertex3f(-1.0f,  1.0f, -1.0f);
+    glColor3f(1.0f, 0.0f, 1.0f); 
+    glVertex3f(-1.0f + anchorX, -1.0f + anchorY, -1.0f + anchorZ);
+    glVertex3f(-1.0f + anchorX, -1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f(-1.0f + anchorX,  1.0f + anchorY,  1.0f + anchorZ);
+    glVertex3f(-1.0f + anchorX,  1.0f + anchorY, -1.0f + anchorZ);
 
     glEnd(); // Done drawing cube
 

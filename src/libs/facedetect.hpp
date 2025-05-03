@@ -60,6 +60,7 @@ void detectFace(cv::Mat image) {
 
     _oc->x = closestFace.x;
     _oc->y = closestFace.y;
+    _oc->z = maxWidth;
 }
 
 void setController(ObjController *oc) {

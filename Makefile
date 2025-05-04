@@ -1,3 +1,4 @@
 all:
-	g++ src/main.cpp -o vobject -Isrc/libs -I/usr/include/opencv4 -L/usr/local/lib -lGL -lGLU -lglut \
+	mkdir -p bin
+	g++ src/main.cpp -o bin/vobject -Isrc/libs -I/usr/include/opencv4 -L/usr/local/lib -lGL -lGLU -lglut \
 	  -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_videoio -lopencv_objdetect

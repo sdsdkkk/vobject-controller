@@ -15,5 +15,5 @@ $ make
 # Running the binary
 
 ```
-$ ./vobject
+$ ./bin/vobject
 ```

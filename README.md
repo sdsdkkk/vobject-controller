@@ -3,7 +3,7 @@ Identify faces from webcam, synchronize an OpenGL-drawn cube's position in a 3D 
 # Install OpenCV libraries
 
 ```
-$ sudo apt install libopencv-dev freeglut3-dev
+$ sudo apt install libopencv-dev freeglut3-dev libglfw3-dev
 ```
 
 # Building the project
